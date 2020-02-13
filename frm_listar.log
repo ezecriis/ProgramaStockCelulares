@@ -1,0 +1,5 @@
+Línea 57: la clase MSFlexGridLib.MSFlexGrid del control flex no era una clase de control cargada.
+Línea 58: el nombre de la propiedad Bindings de flex no es válido.
+Línea 64: el nombre de la propiedad _ExtentX de flex no es válido.
+Línea 65: el nombre de la propiedad _ExtentY de flex no es válido.
+Línea 66: el nombre de la propiedad _Version de flex no es válido.
