@@ -10,23 +10,6 @@ Begin VB.Form frm_modificar_prod
    ScaleHeight     =   6510
    ScaleWidth      =   5415
    StartUpPosition =   2  'CenterScreen
-   Begin VB.Data Data_modificar 
-      Caption         =   "Data1"
-      Connect         =   "Access 2000;"
-      DatabaseName    =   "C:\Users\EXO SMART PRO Q2\Desktop\Profesorado\Mio\ProjecFinalVB"
-      DefaultCursorType=   0  'DefaultCursor
-      DefaultType     =   2  'UseODBC
-      Exclusive       =   0   'False
-      Height          =   495
-      Left            =   600
-      Options         =   0
-      ReadOnly        =   0   'False
-      RecordsetType   =   0  'Table
-      RecordSource    =   "stock"
-      Top             =   3720
-      Visible         =   0   'False
-      Width           =   1935
-   End
    Begin VB.CommandButton cmb_Limpiar 
       Caption         =   "Limpiar"
       Height          =   495
@@ -61,7 +44,7 @@ Begin VB.Form frm_modificar_prod
    End
    Begin VB.TextBox txt_stock 
       DataField       =   "Stock"
-      DataSource      =   "Adodc1"
+      DataSource      =   "DB_Modificar"
       Height          =   285
       Left            =   1200
       TabIndex        =   7
@@ -70,7 +53,7 @@ Begin VB.Form frm_modificar_prod
    End
    Begin VB.TextBox txt_pre 
       DataField       =   "Precio"
-      DataSource      =   "Adodc1"
+      DataSource      =   "DB_Modificar"
       Height          =   285
       Left            =   1200
       TabIndex        =   6
@@ -79,7 +62,7 @@ Begin VB.Form frm_modificar_prod
    End
    Begin VB.TextBox txt_prod 
       DataField       =   "Producto"
-      DataSource      =   "Adodc1"
+      DataSource      =   "DB_Modificar"
       Height          =   285
       Left            =   1200
       TabIndex        =   5
@@ -88,7 +71,7 @@ Begin VB.Form frm_modificar_prod
    End
    Begin VB.TextBox txt_cod 
       DataField       =   "Codigo"
-      DataSource      =   "Adodc1"
+      DataSource      =   "DB_Modificar"
       Height          =   285
       Left            =   1200
       TabIndex        =   4

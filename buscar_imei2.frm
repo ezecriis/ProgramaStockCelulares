@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
-Begin VB.Form buscar_mode 
-   Caption         =   "Busqueda por modelo"
+Begin VB.Form buscar_imei2 
+   Caption         =   "Busqueda por IMEI"
    ClientHeight    =   6165
    ClientLeft      =   60
    ClientTop       =   450
@@ -13,10 +13,11 @@ Begin VB.Form buscar_mode
    Visible         =   0   'False
    Begin MSAdodcLib.Adodc DB_Modelo 
       Height          =   495
-      Left            =   480
-      Top             =   4080
-      Width           =   2895
-      _ExtentX        =   5106
+      Left            =   720
+      Top             =   3960
+      Visible         =   0   'False
+      Width           =   2415
+      _ExtentX        =   4260
       _ExtentY        =   873
       ConnectMode     =   0
       CursorLocation  =   3
@@ -37,15 +38,15 @@ Begin VB.Form buscar_mode
       ForeColor       =   -2147483640
       Orientation     =   0
       Enabled         =   -1
-      Connect         =   $"buscar_nom.frx":0000
-      OLEDBString     =   $"buscar_nom.frx":0094
+      Connect         =   $"buscar_imei2.frx":0000
+      OLEDBString     =   $"buscar_imei2.frx":0094
       OLEDBFile       =   ""
       DataSourceName  =   ""
       OtherAttributes =   ""
       UserName        =   ""
       Password        =   ""
       RecordSource    =   "Modelos"
-      Caption         =   "DB_BuscaModelo"
+      Caption         =   "Adodc1"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
          Size            =   8.25
@@ -83,7 +84,7 @@ Begin VB.Form buscar_mode
    End
    Begin VB.TextBox txt_stock 
       DataField       =   "Stock"
-      DataSource      =   "Adodc1"
+      DataSource      =   "DB_Modelos"
       Enabled         =   0   'False
       Height          =   405
       Left            =   1440
@@ -93,7 +94,7 @@ Begin VB.Form buscar_mode
    End
    Begin VB.TextBox txt_pre 
       DataField       =   "Precio"
-      DataSource      =   "Adodc1"
+      DataSource      =   "DB_Modelos"
       Enabled         =   0   'False
       Height          =   375
       Left            =   1440
@@ -103,21 +104,21 @@ Begin VB.Form buscar_mode
    End
    Begin VB.TextBox txt_cod 
       DataField       =   "Imei"
-      DataSource      =   "Adodc1"
-      Enabled         =   0   'False
+      DataSource      =   "DB_Modelos"
       Height          =   375
       Left            =   1440
       TabIndex        =   5
-      Top             =   720
+      Top             =   120
       Width           =   1455
    End
    Begin VB.TextBox txt_prod 
       DataField       =   "Modelos"
-      DataSource      =   "Adodc1"
+      DataSource      =   "DB_Modelos"
+      Enabled         =   0   'False
       Height          =   375
       Left            =   1440
       TabIndex        =   4
-      Top             =   120
+      Top             =   720
       Width           =   1455
    End
    Begin VB.Label Label4 
@@ -141,7 +142,7 @@ Begin VB.Form buscar_mode
       Height          =   255
       Left            =   240
       TabIndex        =   1
-      Top             =   840
+      Top             =   240
       Width           =   855
    End
    Begin VB.Label Label1 
@@ -149,11 +150,11 @@ Begin VB.Form buscar_mode
       Height          =   255
       Left            =   240
       TabIndex        =   0
-      Top             =   240
+      Top             =   840
       Width           =   975
    End
 End
-Attribute VB_Name = "buscar_mode"
+Attribute VB_Name = "buscar_imei2"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
@@ -165,7 +166,7 @@ txt_prod = ""
 txt_pre = ""
 txt_stock = ""
 
-txt_prod.SetFocus
+txt_cod.SetFocus
 End Sub
 
 Private Sub cmb_volver_Click()
@@ -184,10 +185,10 @@ DB_modelo.Recordset.MovePrevious
 If DB_modelo.Recordset.BOF Then
 End If
 Dim busqueda As String
-busqueda = InputBox("Ingrese el nombre a buscar:", "Sistema de registro")
-DB_modelo.Recordset.Find "Modelos='" & Trim(busqueda) & "'"
+busqueda = InputBox("Ingrese el imei a buscar:", "Sistema de registro")
+DB_modelo.Recordset.Find "Imei='" & Trim(busqueda) & "'"
 If DB_modelo.Recordset.EOF Then
-MsgBox "El nombre no se ha encontrado", vbCritical, "Sistema de Registro"
+MsgBox "El imei no se ha encontrado", vbCritical, "Sistema de Registro"
 Exit Sub
 End If
 txt_prod.Text = DB_modelo.Recordset.Fields(0).Value
@@ -201,6 +202,7 @@ MsgBox "llenar campo", vbCritical, "Sistema de registro"
 End Sub
 
 Private Sub Form_Activate()
-txt_prod.SetFocus
+txt_cod.SetFocus
 DB_modelo.Refresh
 End Sub
+

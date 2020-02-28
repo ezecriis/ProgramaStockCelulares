@@ -18,23 +18,6 @@ Begin VB.Form menu_ventas
       Top             =   3600
       Width           =   1095
    End
-   Begin VB.Data Data_ventas 
-      Caption         =   "Data1"
-      Connect         =   "Access 2000;"
-      DatabaseName    =   "C:\Users\EXO SMART PRO Q2\Desktop\Profesorado\Mio\ProjecFinalVB"
-      DefaultCursorType=   0  'DefaultCursor
-      DefaultType     =   2  'UseODBC
-      Exclusive       =   0   'False
-      Height          =   300
-      Left            =   720
-      Options         =   0
-      ReadOnly        =   0   'False
-      RecordsetType   =   0  'Table
-      RecordSource    =   "stock"
-      Top             =   4200
-      Visible         =   0   'False
-      Width           =   1935
-   End
    Begin VB.CommandButton cmb_buscar 
       Caption         =   "Buscar"
       Height          =   495
@@ -60,6 +43,7 @@ Begin VB.Form menu_ventas
       Width           =   1095
    End
    Begin VB.TextBox txt_cant 
+      DataSource      =   "DB_Venta"
       Height          =   375
       Left            =   1800
       TabIndex        =   9
@@ -68,7 +52,7 @@ Begin VB.Form menu_ventas
    End
    Begin VB.TextBox txt_stock 
       DataField       =   "Stock"
-      DataSource      =   "Adodc1"
+      DataSource      =   "DB_Venta"
       Enabled         =   0   'False
       Height          =   375
       Left            =   1320
@@ -78,7 +62,7 @@ Begin VB.Form menu_ventas
    End
    Begin VB.TextBox txt_pre 
       DataField       =   "Precio"
-      DataSource      =   "Adodc1"
+      DataSource      =   "DB_Venta"
       Enabled         =   0   'False
       Height          =   375
       Left            =   1320
@@ -88,7 +72,7 @@ Begin VB.Form menu_ventas
    End
    Begin VB.TextBox txt_prod 
       DataField       =   "Producto"
-      DataSource      =   "Adodc1"
+      DataSource      =   "DB_Venta"
       Enabled         =   0   'False
       Height          =   375
       Left            =   1320
@@ -98,7 +82,7 @@ Begin VB.Form menu_ventas
    End
    Begin VB.TextBox txt_codigo 
       DataField       =   "Codigo"
-      DataSource      =   "Adodc1"
+      DataSource      =   "DB_Venta"
       Height          =   375
       Left            =   1320
       TabIndex        =   0

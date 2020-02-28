@@ -1,6 +1,5 @@
 VERSION 5.00
-Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
-Begin VB.Form buscar_mode 
+Begin VB.Form borrarimei 
    Caption         =   "Busqueda por modelo"
    ClientHeight    =   6165
    ClientLeft      =   60
@@ -11,51 +10,16 @@ Begin VB.Form buscar_mode
    ScaleWidth      =   5775
    StartUpPosition =   2  'CenterScreen
    Visible         =   0   'False
-   Begin MSAdodcLib.Adodc DB_Modelo 
+   Begin VB.PictureBox DB_Modelo 
+      BackColor       =   &H80000005&
+      ForeColor       =   &H80000008&
       Height          =   495
       Left            =   480
+      ScaleHeight     =   435
+      ScaleWidth      =   2355
+      TabIndex        =   11
       Top             =   4080
-      Width           =   2895
-      _ExtentX        =   5106
-      _ExtentY        =   873
-      ConnectMode     =   0
-      CursorLocation  =   3
-      IsolationLevel  =   -1
-      ConnectionTimeout=   15
-      CommandTimeout  =   30
-      CursorType      =   3
-      LockType        =   3
-      CommandType     =   2
-      CursorOptions   =   0
-      CacheSize       =   50
-      MaxRecords      =   0
-      BOFAction       =   0
-      EOFAction       =   0
-      ConnectStringType=   1
-      Appearance      =   1
-      BackColor       =   -2147483643
-      ForeColor       =   -2147483640
-      Orientation     =   0
-      Enabled         =   -1
-      Connect         =   $"buscar_nom.frx":0000
-      OLEDBString     =   $"buscar_nom.frx":0094
-      OLEDBFile       =   ""
-      DataSourceName  =   ""
-      OtherAttributes =   ""
-      UserName        =   ""
-      Password        =   ""
-      RecordSource    =   "Modelos"
-      Caption         =   "DB_BuscaModelo"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      _Version        =   393216
+      Width           =   2415
    End
    Begin VB.CommandButton cmd_buscar 
       Caption         =   "Buscar"
@@ -153,7 +117,7 @@ Begin VB.Form buscar_mode
       Width           =   975
    End
 End
-Attribute VB_Name = "buscar_mode"
+Attribute VB_Name = "borrarimei"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
@@ -180,20 +144,20 @@ End Sub
 
 Private Sub cmd_buscar_Click()
 On Error GoTo salida
-DB_modelo.Recordset.MovePrevious
-If DB_modelo.Recordset.BOF Then
+DB_Modelo.Recordset.MovePrevious
+If DB_Modelo.Recordset.BOF Then
 End If
 Dim busqueda As String
 busqueda = InputBox("Ingrese el nombre a buscar:", "Sistema de registro")
-DB_modelo.Recordset.Find "Modelos='" & Trim(busqueda) & "'"
-If DB_modelo.Recordset.EOF Then
+DB_Modelo.Recordset.Find "Modelos='" & Trim(busqueda) & "'"
+If DB_Modelo.Recordset.EOF Then
 MsgBox "El nombre no se ha encontrado", vbCritical, "Sistema de Registro"
 Exit Sub
 End If
-txt_prod.Text = DB_modelo.Recordset.Fields(0).Value
-txt_cod.Text = DB_modelo.Recordset.Fields(1).Value
-txt_pre.Text = DB_modelo.Recordset.Fields(2).Value
-txt_stock.Text = DB_modelo.Recordset.Fields(3).Value
+txt_prod.Text = DB_Modelo.Recordset.Fields(0).Value
+txt_cod.Text = DB_Modelo.Recordset.Fields(1).Value
+txt_pre.Text = DB_Modelo.Recordset.Fields(2).Value
+txt_stock.Text = DB_Modelo.Recordset.Fields(3).Value
 
 Exit Sub
 salida:
@@ -202,5 +166,5 @@ End Sub
 
 Private Sub Form_Activate()
 txt_prod.SetFocus
-DB_modelo.Refresh
+DB_Modelo.Refresh
 End Sub

@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
-Begin VB.Form buscar_mode 
-   Caption         =   "Busqueda por modelo"
+Begin VB.Form eliminar_imei2 
+   Caption         =   "Eliminar por IMEI"
    ClientHeight    =   6165
    ClientLeft      =   60
    ClientTop       =   450
@@ -11,12 +11,12 @@ Begin VB.Form buscar_mode
    ScaleWidth      =   5775
    StartUpPosition =   2  'CenterScreen
    Visible         =   0   'False
-   Begin MSAdodcLib.Adodc DB_Modelo 
+   Begin MSAdodcLib.Adodc Adodc1 
       Height          =   495
-      Left            =   480
-      Top             =   4080
-      Width           =   2895
-      _ExtentX        =   5106
+      Left            =   720
+      Top             =   4800
+      Width           =   2655
+      _ExtentX        =   4683
       _ExtentY        =   873
       ConnectMode     =   0
       CursorLocation  =   3
@@ -37,15 +37,15 @@ Begin VB.Form buscar_mode
       ForeColor       =   -2147483640
       Orientation     =   0
       Enabled         =   -1
-      Connect         =   $"buscar_nom.frx":0000
-      OLEDBString     =   $"buscar_nom.frx":0094
+      Connect         =   $"eliminar_imei2.frx":0000
+      OLEDBString     =   $"eliminar_imei2.frx":0094
       OLEDBFile       =   ""
       DataSourceName  =   ""
       OtherAttributes =   ""
       UserName        =   ""
       Password        =   ""
       RecordSource    =   "Modelos"
-      Caption         =   "DB_BuscaModelo"
+      Caption         =   "Adodc1"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
          Size            =   8.25
@@ -56,6 +56,26 @@ Begin VB.Form buscar_mode
          Strikethrough   =   0   'False
       EndProperty
       _Version        =   393216
+   End
+   Begin VB.CommandButton cmb_eliminar 
+      Caption         =   "Eliminar"
+      Height          =   495
+      Left            =   3840
+      TabIndex        =   12
+      Top             =   2760
+      Width           =   1215
+   End
+   Begin VB.PictureBox DB_Modelo 
+      BackColor       =   &H80000005&
+      ForeColor       =   &H80000008&
+      Height          =   495
+      Left            =   720
+      ScaleHeight     =   435
+      ScaleWidth      =   2355
+      TabIndex        =   11
+      Top             =   3960
+      Visible         =   0   'False
+      Width           =   2415
    End
    Begin VB.CommandButton cmd_buscar 
       Caption         =   "Buscar"
@@ -104,20 +124,20 @@ Begin VB.Form buscar_mode
    Begin VB.TextBox txt_cod 
       DataField       =   "Imei"
       DataSource      =   "Adodc1"
-      Enabled         =   0   'False
       Height          =   375
       Left            =   1440
       TabIndex        =   5
-      Top             =   720
+      Top             =   120
       Width           =   1455
    End
    Begin VB.TextBox txt_prod 
       DataField       =   "Modelos"
       DataSource      =   "Adodc1"
+      Enabled         =   0   'False
       Height          =   375
       Left            =   1440
       TabIndex        =   4
-      Top             =   120
+      Top             =   720
       Width           =   1455
    End
    Begin VB.Label Label4 
@@ -141,7 +161,7 @@ Begin VB.Form buscar_mode
       Height          =   255
       Left            =   240
       TabIndex        =   1
-      Top             =   840
+      Top             =   240
       Width           =   855
    End
    Begin VB.Label Label1 
@@ -149,15 +169,19 @@ Begin VB.Form buscar_mode
       Height          =   255
       Left            =   240
       TabIndex        =   0
-      Top             =   240
+      Top             =   840
       Width           =   975
    End
 End
-Attribute VB_Name = "buscar_mode"
+Attribute VB_Name = "eliminar_imei2"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+Private Sub cmb_eliminar_Click()
+
+End Sub
+
 Private Sub cmb_limpiar_Click()
 
 txt_cod = ""
@@ -165,7 +189,7 @@ txt_prod = ""
 txt_pre = ""
 txt_stock = ""
 
-txt_prod.SetFocus
+txt_cod.SetFocus
 End Sub
 
 Private Sub cmb_volver_Click()
@@ -180,20 +204,20 @@ End Sub
 
 Private Sub cmd_buscar_Click()
 On Error GoTo salida
-DB_modelo.Recordset.MovePrevious
-If DB_modelo.Recordset.BOF Then
+DB_Modelo.Recordset.MovePrevious
+If DB_Modelo.Recordset.BOF Then
 End If
 Dim busqueda As String
-busqueda = InputBox("Ingrese el nombre a buscar:", "Sistema de registro")
-DB_modelo.Recordset.Find "Modelos='" & Trim(busqueda) & "'"
-If DB_modelo.Recordset.EOF Then
-MsgBox "El nombre no se ha encontrado", vbCritical, "Sistema de Registro"
+busqueda = InputBox("Ingrese el imei a buscar:", "Sistema de registro")
+DB_Modelo.Recordset.Find "Imei='" & Trim(busqueda) & "'"
+If DB_Modelo.Recordset.EOF Then
+MsgBox "El imei no se ha encontrado", vbCritical, "Sistema de Registro"
 Exit Sub
 End If
-txt_prod.Text = DB_modelo.Recordset.Fields(0).Value
-txt_cod.Text = DB_modelo.Recordset.Fields(1).Value
-txt_pre.Text = DB_modelo.Recordset.Fields(2).Value
-txt_stock.Text = DB_modelo.Recordset.Fields(3).Value
+txt_prod.Text = DB_Modelo.Recordset.Fields(0).Value
+txt_cod.Text = DB_Modelo.Recordset.Fields(1).Value
+txt_pre.Text = DB_Modelo.Recordset.Fields(2).Value
+txt_stock.Text = DB_Modelo.Recordset.Fields(3).Value
 
 Exit Sub
 salida:
@@ -201,6 +225,7 @@ MsgBox "llenar campo", vbCritical, "Sistema de registro"
 End Sub
 
 Private Sub Form_Activate()
-txt_prod.SetFocus
-DB_modelo.Refresh
+txt_cod.SetFocus
+DB_Modelo.Refresh
 End Sub
+
